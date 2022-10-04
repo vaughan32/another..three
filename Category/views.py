@@ -121,37 +121,6 @@ class UpdateCategory(OrgarnizerCheckLoginRequiredMixin,generic.UpdateView):
         return reverse('category_list')
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class DeleteCategory(OrgarnizerCheckLoginRequiredMixin,generic.DeleteView):
     template_name = 'Category/category_delete.html'
     context_object_name = 'category_detail'
