@@ -1,0 +1,41 @@
+{% extends 'Leads/base.html' %}
+{% block content %}
+<section class="text-gray-600 body-font">
+    <div class="container px-5 py-3 mx-auto">
+      <div class="flex flex-col text-center w-full">
+        <h1 class="sm:text-4xl text-3xl font-medium title-font mb-1 text-gray-900 font">{{category_detail.name}} Category</h1>
+        <p class="lg:w-2/3 mx-auto leading-relaxed text-base font">There  are ({{count}}) the Leads under this category</p>
+      </div>
+      <div class="lg:w-2/3 w-full mx-auto overflow-auto">
+            {% for lead in leads %}
+            <div class="p-4 w-full">
+              <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col">
+                <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
+                  <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-8 h-8" viewBox="0 0 24 24">
+                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                  </svg>
+                </div>
+                <div class="flex-grow">
+                  <h2 class="text-gray-900 text-lg font-medium mb-3 font2">Lead {{lead.first_name}} {{lead.last_name}}</h2>
+                  <p class="leading-relaxed text-base font3">
+                    {{lead.description}}
+                  </p>
+                  <a href="{% url 'lead_detail' pk=lead.pk %}" class="mt-3 text-indigo-500 inline-flex items-center font3">View The Lead
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                      <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            {% if request.user.is_orgarnizer %}
+            <div>
+            <div class="flex"><a href="{% url 'category_update' pk=category_detail.pk %}" class="text-white w-full bg-blue-500 hover:bg-blue-600 px-5 py-2 mt-3 font rounded-md text-center">Update {{category_detail.name}} Category</a></div>
+            <div class="flex"><a href="{% url 'category_delete' pk=category_detail.pk %}" class="bg-indigo-600 border-0 text-white w-full px-5 py-2 mt-3 font rounded-md text-center focus:outline-none hover:bg-indigo-500">Delete {{category_detail.name}} Category</a></div>
+          </div>
+          {% endif %}
+      </div>
+    </div>
+  </section>
+{% endblock content %}

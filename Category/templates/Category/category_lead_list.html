@@ -1,0 +1,55 @@
+{% extends 'Leads/base.html' %}
+{% block content %}
+<section class="text-gray-600 body-font">
+    <div class="container px-5 py-24 mx-auto flex flex-wrap">
+        <div class="w-full mb-6 py-2 flex justify-between items-center border-b border-gray-200">
+            <div>
+                <h4 class="font">Categories</h4>
+            </div>
+            {% if request.user.is_orgarnizer %}
+            <div>
+              <a class="font hover:text-blue-500" href="{% url 'category_create' %}">Create A New Category</a>
+          </div>
+          {% endif %}
+        </div>
+      <div class="flex flex-wrap -m-4">
+        {% if category_lead_list  %}
+        <div class="p-4 w-full">
+          <h4 class="font"> All leads without Category In This Profile ({{leads_under_category_not_assigned}})</h4>
+        </div>
+        {% for category in category_lead_list %}
+        <div class="p-4 lg:w-1/2 md:w-full">
+          <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col">
+            <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
+              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-8 h-8" viewBox="0 0 24 24">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+              </svg>
+            </div>
+            <div class="flex-grow">
+              <h2 class="text-gray-900 text-lg font-medium mb-3 font2">{{category.name}} Category</h2>
+              <p class="leading-relaxed text-base font3">
+                As an IT Support Engineer you’
+                ll enjoy a fast-paced, busy, fun environment working as part of a team. Each day presents
+                different challenges! The service department is extremely busy and challenging and requires 
+                a person with the right combination of customer facing skills and technical know-how.
+              </p>
+              <a href="{% url 'category_detail_related_to_leads' pk=category.pk %}" class="mt-3 text-indigo-500 inline-flex items-center font3">View The Leads Under This Category
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="p-4 w-full"><h4 class="font">You currently have no Category in your orgarnization</h4></div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endblock content %}
+
+
+
+
